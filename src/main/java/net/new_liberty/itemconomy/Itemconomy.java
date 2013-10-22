@@ -10,5 +10,5 @@ import org.bukkit.plugin.java.JavaPlugin;
  *
  * @author simplyianm
  */
-public class ItemConomy extends JavaPlugin {
+public class Itemconomy extends JavaPlugin {
 }
