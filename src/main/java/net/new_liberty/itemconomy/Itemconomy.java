@@ -4,6 +4,7 @@
  */
 package net.new_liberty.itemconomy;
 
+import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
@@ -11,4 +12,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @author simplyianm
  */
 public class Itemconomy extends JavaPlugin {
+
+    public Material getCurrency() {
+        return Material.EMERALD;
+    }
+
 }

@@ -5,4 +5,3 @@ author: ${author}
 website: ${project.url}
 
 main: ${mainClass}
-depend: [WorldGuard]
