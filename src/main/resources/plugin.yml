@@ -1,0 +1,8 @@
+name: ${project.name}
+description: ${project.description}
+version: ${project.version}-b${buildNumber}
+author: ${author}
+website: ${project.url}
+
+main: ${mainClass}
+depend: [WorldGuard]
