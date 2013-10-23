@@ -35,6 +35,11 @@ public class ICInventory {
     public int balance() {
         int sum = 0;
         for (ItemStack s : stacks()) {
+            // Check for null itemstack
+            if (s == null) {
+                continue;
+            }
+
             sum += Itemconomy.i().getValue(s.getType());
         }
         return sum;
@@ -48,6 +53,11 @@ public class ICInventory {
     public List<ItemStack> stacks() {
         List<ItemStack> r = new ArrayList<ItemStack>();
         for (ItemStack s : i.getContents()) {
+            // Check for null itemstack
+            if (s == null) {
+                continue;
+            }
+
             for (Entry<Material, Integer> e : Itemconomy.i().currencySet()) {
                 if (s.getType() == e.getKey()) {
                     r.add(s);
@@ -88,6 +98,11 @@ public class ICInventory {
 
                 if (surplus == 0) {
                     break;
+                }
+
+                // Check for null itemstack
+                if (t == null) {
+                    continue;
                 }
 
                 if (t.getType() == e.getValue()) {
