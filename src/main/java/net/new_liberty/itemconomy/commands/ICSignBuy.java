@@ -53,7 +53,11 @@ public class ICSignBuy implements CommandExecutor {
             return true;
         }
 
-        i.remove(price);
+        int of = i.remove(price);
+        if (of != 0) {
+            p.sendMessage(ChatColor.RED + "You don't have enough emeralds to buy this! Turn your emerald blocks into emeralds and try again. (Need " + of + " more emeralds)");
+            return true;
+        }
 
         String[] cmdArray = new String[args.length - 2];
         System.arraycopy(args, 2, cmdArray, 0, cmdArray.length);
