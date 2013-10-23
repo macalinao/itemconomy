@@ -77,7 +77,7 @@ public class ICInventory {
         SortedMap<Integer, Material> s = new TreeMap<Integer, Material>(new Comparator<Integer>() {
             @Override
             public int compare(Integer o1, Integer o2) {
-                return o1 - o2;
+                return o2 - o1; // Sorted backwards
             }
 
         });
