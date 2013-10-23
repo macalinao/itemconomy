@@ -118,7 +118,11 @@ public class ICInventory {
                     }
 
                     // Remove the item
-                    ret.put(e.getValue(), ret.get(e.getValue()) + rem);
+                    Integer curr = ret.get(e.getValue());
+                    if (curr == null) {
+                        curr = 0;
+                    }
+                    ret.put(e.getValue(), curr + rem);
 
                     surplus -= rem;
                 }
