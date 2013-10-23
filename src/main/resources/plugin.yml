@@ -5,3 +5,12 @@ author: ${author}
 website: ${project.url}
 
 main: ${mainClass}
+
+permissions:
+  itemconomy.console:
+    description: Allows use of the sign related commands.
+commands:
+  icsignbuy:
+    description: Buy stuff
+    usage: /icsignbuy <player> <price> <cmd>
+

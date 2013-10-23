@@ -8,6 +8,7 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import net.new_liberty.itemconomy.commands.ICSignBuy;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,6 +29,9 @@ public class Itemconomy extends JavaPlugin {
         // Our currency - TODO config
         currency.put(Material.EMERALD, 1);
         currency.put(Material.EMERALD_BLOCK, 9);
+
+        // Commands
+        getCommand("icsignbuy").setExecutor(new ICSignBuy());
     }
 
     @Override
