@@ -40,7 +40,7 @@ public class ICInventory {
                 continue;
             }
 
-            sum += Itemconomy.i().getValue(s.getType());
+            sum += Itemconomy.i().getValue(s.getType()) * s.getAmount();
         }
         return sum;
     }

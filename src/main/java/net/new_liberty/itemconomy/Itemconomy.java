@@ -64,7 +64,8 @@ public class Itemconomy extends JavaPlugin {
      * @return
      */
     public int getValue(Material m) {
-        return currency.get(m);
+        Integer r = currency.get(m);
+        return (r == null) ? 0 : r;
     }
 
 }
