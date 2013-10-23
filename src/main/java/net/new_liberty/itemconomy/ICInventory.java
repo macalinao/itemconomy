@@ -6,7 +6,9 @@ package net.new_liberty.itemconomy;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -68,11 +70,14 @@ public class ICInventory {
     }
 
     /**
-     * Removes an amount of currency from this inventory.
+     * Finds the costs associated with the given amount of emeralds.
      *
      * @param amt
+     * @return Overflow (should equal 0 if successful)
      */
-    public void remove(int amt) {
+    public int remove(int amt) {
+        Map<Material, Integer> ret = new EnumMap<Material, Integer>(Material.class);
+
         // Sort using a tree map
         SortedMap<Integer, Material> s = new TreeMap<Integer, Material>(new Comparator<Integer>() {
             @Override
@@ -113,11 +118,7 @@ public class ICInventory {
                     }
 
                     // Remove the item
-                    if (rem == 0) {
-                        i.clear(a);
-                    } else {
-                        t.setAmount(t.getAmount() - rem);
-                    }
+                    ret.put(e.getValue(), ret.get(e.getValue()) + rem);
 
                     surplus -= rem;
                 }
@@ -128,6 +129,16 @@ public class ICInventory {
 
             amt -= removed * e.getKey();
         }
+
+        if (amt != 0) {
+            return amt;
+        }
+
+        for (Entry<Material, Integer> e : ret.entrySet()) {
+            i.removeItem(new ItemStack(e.getKey(), e.getValue()));
+        }
+
+        return amt;
     }
 
 }
