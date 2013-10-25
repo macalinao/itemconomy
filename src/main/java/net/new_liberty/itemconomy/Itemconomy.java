@@ -4,11 +4,13 @@
  */
 package net.new_liberty.itemconomy;
 
+import com.simplyian.easydb.EasyDB;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import net.new_liberty.itemconomy.commands.ICSignBuy;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,6 +31,15 @@ public class Itemconomy extends JavaPlugin {
         // Our currency - TODO config
         currency.put(Material.EMERALD, 1);
         currency.put(Material.EMERALD_BLOCK, 9);
+
+        // Database stuff
+        if (Bukkit.getPluginManager().getPlugin("EasyDB") != null) {
+            EasyDB.getDb().update("CREATE TABLE IF NOT EXISTS icbank ("
+                    + "id INT(10) NOT NULL AUTO_INCREMENT,"
+                    + "player varchar(16) NOT NULL,"
+                    + "balance INT(10) NOT NULL,"
+                    + "PRIMARY KEY (id));");
+        }
 
         // Commands
         getCommand("icsignbuy").setExecutor(new ICSignBuy());
