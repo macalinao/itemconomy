@@ -52,7 +52,8 @@ public class ICSignDeposit implements CommandExecutor {
         }
 
         BankAccount b = new BankAccount(p);
-        c.transfer(b, amt);
+        c.remove(amt);
+        b.add(amt);
 
         p.sendMessage(ChatColor.YELLOW + "You have successfully transferred " + amt + " emeralds to your bank account.");
         return true;

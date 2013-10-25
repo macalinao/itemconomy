@@ -22,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author simplyianm
  */
-public class CurrencyInventory extends CurrencyHolder {
+public class CurrencyInventory implements CurrencyHolder {
 
     private final Inventory i;
 
