@@ -22,11 +22,11 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author simplyianm
  */
-public class ICInventory implements CurrencyHolder {
+public class CurrencyInventory implements CurrencyHolder {
 
     private final Inventory i;
 
-    public ICInventory(Player p) {
+    public CurrencyInventory(Player p) {
         this.i = p.getInventory();
     }
 

@@ -5,7 +5,7 @@
 package net.new_liberty.itemconomy.commands;
 
 import com.google.common.base.Joiner;
-import net.new_liberty.itemconomy.ICInventory;
+import net.new_liberty.itemconomy.CurrencyInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -47,7 +47,7 @@ public class ICSignBuy implements CommandExecutor {
 
         String name = args[2].replaceAll("_", " ");
 
-        ICInventory i = new ICInventory(p);
+        CurrencyInventory i = new CurrencyInventory(p);
         int balance = i.balance();
         if (balance < price) {
             p.sendMessage(ChatColor.RED + "You don't have enough currency to buy this! (Requires " + price + "; you only have " + balance + ")");
