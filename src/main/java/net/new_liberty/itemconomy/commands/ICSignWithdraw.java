@@ -17,7 +17,7 @@ import org.bukkit.entity.Player;
  *
  * @author simplyianm
  */
-public class ICSignDeposit implements CommandExecutor {
+public class ICSignWithdraw implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -27,7 +27,7 @@ public class ICSignDeposit implements CommandExecutor {
         }
 
         if (args.length < 2) {
-            sender.sendMessage(ChatColor.RED + "Usage: /icsigndeposit <player> <amt>");
+            sender.sendMessage(ChatColor.RED + "Usage: /icsignwithdraw <player> <amt>");
             return true;
         }
 
@@ -45,16 +45,18 @@ public class ICSignDeposit implements CommandExecutor {
             return true;
         }
 
-        CurrencyInventory c = new CurrencyInventory(p);
-        int holding = c.balance();
+        BankAccount b = new BankAccount(p);
+        int holding = b.balance();
         if (holding < amt) {
-            p.sendMessage(ChatColor.RED + "You don't have " + amt + " emeralds in your inventory to deposit!");
-            return true;
+            p.sendMessage(ChatColor.RED + "You don't have " + amt + " emeralds in your bank account to withdraw!");
         }
 
-        BankAccount b = new BankAccount(p);
-        c.remove(amt);
-        b.add(amt);
+        CurrencyInventory c = new CurrencyInventory(p);
+        if (!c.add(amt)) {
+            p.sendMessage(ChatColor.RED + "You don't have enough space for " + amt + " emeralds in your inventory!");
+            return true;
+        }
+        b.remove(amt);
 
         p.sendMessage(ChatColor.YELLOW + "You have successfully transferred " + amt + " emeralds to your bank account.");
         return true;
