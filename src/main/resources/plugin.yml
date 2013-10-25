@@ -11,6 +11,12 @@ permissions:
   itemconomy.console:
     description: Allows use of the sign related commands.
 commands:
+  icbalance:
+    description: Check someone''s balance
+    usage: /icbalance <player>
+  icsignbalance:
+    description: Check yo balance
+    usage: /icsignbalance <player>
   icsignbuy:
     description: Buy stuff
     usage: /icsignbuy <player> <price> <cmd>

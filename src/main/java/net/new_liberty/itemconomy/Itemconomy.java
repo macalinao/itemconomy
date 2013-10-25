@@ -9,6 +9,8 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import net.new_liberty.itemconomy.commands.ICBalance;
+import net.new_liberty.itemconomy.commands.ICSignBalance;
 import net.new_liberty.itemconomy.commands.ICSignBuy;
 import net.new_liberty.itemconomy.commands.ICSignDeposit;
 import net.new_liberty.itemconomy.commands.ICSignWithdraw;
@@ -44,6 +46,9 @@ public class Itemconomy extends JavaPlugin {
         }
 
         // Commands
+        getCommand("icbalance").setExecutor(new ICBalance());
+
+        getCommand("icsignbalance").setExecutor(new ICSignBalance());
         getCommand("icsignbuy").setExecutor(new ICSignBuy());
         getCommand("icsigndeposit").setExecutor(new ICSignDeposit());
         getCommand("icsignwithdraw").setExecutor(new ICSignWithdraw());
