@@ -7,6 +7,7 @@ package net.new_liberty.itemconomy;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +22,7 @@ import org.bukkit.inventory.ItemStack;
  *
  * @author simplyianm
  */
-public class ICInventory {
+public class ICInventory implements CurrencyHolder {
 
     private final Inventory i;
 
@@ -29,11 +30,7 @@ public class ICInventory {
         this.i = p.getInventory();
     }
 
-    /**
-     * Gets this player's balance.
-     *
-     * @return
-     */
+    @Override
     public int balance() {
         int sum = 0;
         for (ItemStack s : stacks()) {
@@ -70,11 +67,46 @@ public class ICInventory {
     }
 
     /**
-     * Finds the costs associated with the given amount of emeralds.
+     * {@inheritDoc} Uses the largest denominations of currency possible.
      *
      * @param amt
-     * @return Overflow (should equal 0 if successful)
      */
+    @Override
+    public boolean add(int amt) {
+        // Sort using a tree map
+        SortedMap<Integer, Material> s = new TreeMap<Integer, Material>(new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return o2 - o1; // Sorted backwards
+            }
+
+        });
+
+        // Place elements to sort
+        for (Entry<Material, Integer> e : Itemconomy.i().currencySet()) {
+            s.put(e.getValue(), e.getKey());
+        }
+
+        for (Entry<Integer, Material> e : s.entrySet()) {
+            int jay = amt / e.getKey();
+
+            ItemStack a = new ItemStack(e.getValue(), jay);
+            Map<Integer, ItemStack> res = i.addItem(a);
+
+            if (!res.isEmpty()) {
+                int z = 0;
+                for (ItemStack i : res.values()) {
+                    z += i.getAmount();
+                }
+                i.remove(new ItemStack(e.getValue(), jay - z)); // jay - z
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public int remove(int amt) {
         Map<Material, Integer> ret = new EnumMap<Material, Integer>(Material.class);
 
