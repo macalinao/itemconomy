@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import net.new_liberty.itemconomy.commands.ICSignBuy;
+import net.new_liberty.itemconomy.commands.ICSignDeposit;
+import net.new_liberty.itemconomy.commands.ICSignWithdraw;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -43,6 +45,8 @@ public class Itemconomy extends JavaPlugin {
 
         // Commands
         getCommand("icsignbuy").setExecutor(new ICSignBuy());
+        getCommand("icsigndeposit").setExecutor(new ICSignDeposit());
+        getCommand("icsignwithdraw").setExecutor(new ICSignWithdraw());
     }
 
     @Override

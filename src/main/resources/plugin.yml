@@ -14,4 +14,9 @@ commands:
   icsignbuy:
     description: Buy stuff
     usage: /icsignbuy <player> <price> <cmd>
-
+  icsigndeposit:
+    description: Deposit emeralds
+    usage: /icsigndeposit <player> <amt>
+  icsignwithdraw:
+    description: Withdraw emeralds
+    usage: /icsignwithdraw <player> <amt>
