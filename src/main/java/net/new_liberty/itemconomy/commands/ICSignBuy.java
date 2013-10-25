@@ -26,8 +26,8 @@ public class ICSignBuy implements CommandExecutor {
             return true;
         }
 
-        if (args.length < 3) {
-            sender.sendMessage(ChatColor.RED + "Usage: /icsignbuy <player> <price> <cmd>");
+        if (args.length < 4) {
+            sender.sendMessage(ChatColor.RED + "Usage: /icsignbuy <player> <price> <name> <cmd>");
             return true;
         }
 
@@ -45,6 +45,7 @@ public class ICSignBuy implements CommandExecutor {
             return true;
         }
 
+        String name = args[2].replaceAll("_", " ");
 
         ICInventory i = new ICInventory(p);
         int balance = i.balance();
@@ -65,6 +66,7 @@ public class ICSignBuy implements CommandExecutor {
 
         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), cmd);
 
+        p.sendMessage(ChatColor.YELLOW + "You have bought " + name + " for " + price + " emeralds.");
         return true;
     }
 
