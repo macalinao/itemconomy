@@ -73,6 +73,10 @@ public class CurrencyInventory extends CurrencyHolder {
      */
     @Override
     public boolean add(int amt) {
+        if (amt < 0) {
+            throw new IllegalArgumentException("Amount transferred cannot be negative!");
+        }
+
         // Sort using a tree map
         SortedMap<Integer, Material> s = new TreeMap<Integer, Material>(new Comparator<Integer>() {
             @Override
@@ -108,6 +112,10 @@ public class CurrencyInventory extends CurrencyHolder {
 
     @Override
     public int remove(int amt) {
+        if (amt < 0) {
+            throw new IllegalArgumentException("Amount transferred cannot be negative!");
+        }
+
         Map<Material, Integer> ret = new EnumMap<Material, Integer>(Material.class);
 
         // Sort using a tree map
