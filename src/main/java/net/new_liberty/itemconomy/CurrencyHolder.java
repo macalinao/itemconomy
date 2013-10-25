@@ -8,14 +8,14 @@ package net.new_liberty.itemconomy;
  *
  * @author simplyianm
  */
-public interface CurrencyHolder {
+public abstract class CurrencyHolder {
 
     /**
      * Gets the total currency this CurrencyHolder is holding.
      *
      * @return
      */
-    public int balance();
+    public abstract int balance();
 
     /**
      * Adds an amount of economy to this CurrencyHolder.
@@ -23,7 +23,7 @@ public interface CurrencyHolder {
      * @param amt
      * @return True if the add was successful
      */
-    public boolean add(int amt);
+    public abstract boolean add(int amt);
 
     /**
      * Removes some currency from this CurrencyHolder.
@@ -32,6 +32,26 @@ public interface CurrencyHolder {
      * @return Overflow (non-zero value indicates failure, returned value is the
      * amount of single-value currency needed to complete a transaction
      */
-    public int remove(int amt);
+    public abstract int remove(int amt);
+
+    /**
+     * Transfers money between CurrencyHolders.
+     *
+     * @param other
+     * @param amt
+     * @return
+     */
+    public boolean transfer(CurrencyHolder other, int amt) {
+        if (remove(amt) != 0) {
+            return false;
+        }
+
+        if (!other.add(amt)) {
+            add(amt);
+            return false;
+        }
+
+        return true;
+    }
 
 }

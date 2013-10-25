@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 /**
  * Represents a bank account of a player.
  */
-public class BankAccount implements CurrencyHolder {
+public class BankAccount extends CurrencyHolder {
 
     private final String owner;
 
